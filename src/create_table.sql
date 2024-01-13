@@ -119,14 +119,14 @@ CREATE TABLE `ServiceStatus` (
 );
 
 CREATE TABLE `BookingService` (
+  `BookingServiceID` int PRIMARY KEY AUTO_INCREMENT,
   `BookingID` int NOT NULL,
   `ServiceID` int NOT NULL,
   `ServiceStatusID` int NOT NULL,
   `Unit` int NOT NULL CHECK (`Unit` >= 1),
   `Note` varchar(1024),
   `CreatedAt` timestamp default CURRENT_TIMESTAMP NOT NULL COMMENT 'create time',
-  `UpdatedAt` timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL COMMENT 'update time',
-  PRIMARY KEY (`BookingID`, `ServiceID`)
+  `UpdatedAt` timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL COMMENT 'update time'
 );
 
 

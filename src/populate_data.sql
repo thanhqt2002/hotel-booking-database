@@ -108,7 +108,7 @@ INSERT INTO `RoomStatus` (`Name`, `Description`) VALUES
 
 
 -- Insert rooms for Sunset Resort (SR), excluding status 4
-INSERT INTO Room (`HotelID`, `RoomTypeID`, `RoomStatusID`, `RoomNumber`) VALUES
+INSERT INTO `Room` (`HotelID`, `RoomTypeID`, `RoomStatusID`, `RoomNumber`) VALUES
 (1, 1, 1, 'SR101'), (1, 1, 2, 'SR102'), (1, 1, 3, 'SR103'), -- Standard Single
 (1, 2, 1, 'SR105'), (1, 2, 2, 'SR106'), (1, 2, 3, 'SR107'), -- Standard Double
 (1, 3, 1, 'SR201'), (1, 3, 2, 'SR202'), (1, 3, 3, 'SR203'), -- Deluxe Single
@@ -128,7 +128,7 @@ INSERT INTO Room (`HotelID`, `RoomTypeID`, `RoomStatusID`, `RoomNumber`) VALUES
 
 
 -- Insert rooms for Mountain Escape (ME)
-INSERT INTO Room (`HotelID`, `RoomTypeID`, `RoomStatusID`, `RoomNumber`) VALUES
+INSERT INTO `Room` (`HotelID`, `RoomTypeID`, `RoomStatusID`, `RoomNumber`) VALUES
 (2, 1, 1, 'ME101'), (2, 1, 2, 'ME102'), (2, 1, 3, 'ME103'), -- Standard Single
 (2, 2, 1, 'ME105'), (2, 2, 2, 'ME106'), (2, 2, 3, 'ME107'), -- Standard Double
 (2, 3, 1, 'ME201'), (2, 3, 2, 'ME202'), (2, 3, 3, 'ME203'), -- Deluxe Single
@@ -148,7 +148,7 @@ INSERT INTO Room (`HotelID`, `RoomTypeID`, `RoomStatusID`, `RoomNumber`) VALUES
 
 
 -- Insert rooms for Urban Retreat (UR)
-INSERT INTO Room (`HotelID`, `RoomTypeID`, `RoomStatusID`, `RoomNumber`) VALUES
+INSERT INTO `Room` (`HotelID`, `RoomTypeID`, `RoomStatusID`, `RoomNumber`) VALUES
 (3, 1, 1, 'UR101'), (3, 1, 2, 'UR102'), (3, 1, 3, 'UR103'), -- Standard Single
 (3, 2, 1, 'UR105'), (3, 2, 2, 'UR106'), (3, 2, 3, 'UR107'), -- Standard Double
 (3, 3, 1, 'UR201'), (3, 3, 2, 'UR202'), (3, 3, 3, 'UR203'), -- Deluxe Single
@@ -169,7 +169,7 @@ INSERT INTO Room (`HotelID`, `RoomTypeID`, `RoomStatusID`, `RoomNumber`) VALUES
 
 
 -- Populate Service Data
-INSERT INTO Service (`Name`, `Description`, `Price`) VALUES 
+INSERT INTO `Service` (`Name`, `Description`, `Price`) VALUES 
 ('Car Rental', 'Offers convenient car rental options for guests', 60.00),
 ('Flower Arrangement', 'Provides custom flower arrangement services for rooms and events', 35.00),
 ('Dry Cleaning', 'Professional dry cleaning services for guest apparel', 20.00),
@@ -233,18 +233,85 @@ INSERT INTO `ServiceStatus` (`Name`, `Description`) VALUES
 ('Canceled', 'Service request has been cancelled'),
 ('Completed', 'Service has been provided and completed');
 
+-- Populate BookingStatus table with sample data
 INSERT INTO `BookingStatus` (`Name`, `Description`) VALUES
 ('Confirmed', 'The booking is confirmed and the room is reserved'),
 ('CheckedIn', 'The guest has checked into the hotel'),
-('CheckedOut', 'The guest has checked out and the booking is complete');
+('CheckedOut', 'The guest has checked out and the booking is complete'),
+('Cancaled',  'Booking has been cancelled');
+
+-- Insert guests
+INSERT INTO Guest (`FirstName`, `LastName`, `DateOfBirth`, `Phone`, `Email`) VALUES
+('Alice', 'Johnson', '1985-02-15', '123-456-7890', 'alice.johnson@example.com'),
+('Bob', 'Smith', '1990-06-20', '234-567-8901', 'bob.smith@example.com'),
+('Carol', 'Davis', '1988-03-05', '345-678-9012', 'carol.davis@example.com'),
+('David', 'Miller', '1975-07-22', '456-789-0123', 'david.miller@example.com'),
+('Emma', 'Wilson', '1982-11-30', '567-890-1234', 'emma.wilson@example.com'),
+('Frank', 'Brown', '1992-04-16', '678-901-2345', 'frank.brown@example.com'),
+('Grace', 'Taylor', '1986-09-08', '789-012-3456', 'grace.taylor@example.com');
 
 
--- -- Insert guests
--- INSERT INTO Guest (`FirstName`, `LastName`, `DateOfBirth`, `Phone`, `Email`) VALUES
--- ('Alice', 'Johnson', '1985-02-15', '123-456-7890', 'alice.johnson@example.com'),
--- ('Bob', 'Smith', '1990-06-20', '234-567-8901', 'bob.smith@example.com'),
--- ('Carol', 'Davis', '1988-03-05', '345-678-9012', 'carol.davis@example.com'),
--- ('David', 'Miller', '1975-07-22', '456-789-0123', 'david.miller@example.com'),
--- ('Emma', 'Wilson', '1982-11-30', '567-890-1234', 'emma.wilson@example.com'),
--- ('Frank', 'Brown', '1992-04-16', '678-901-2345', 'frank.brown@example.com'),
--- ('Grace', 'Taylor', '1986-09-08', '789-012-3456', 'grace.taylor@example.com');
+-- Insert bookings
+INSERT INTO `Booking` (`GuestID`, `HotelID`, `BookingStatusID`, `CheckinDate`, `CheckoutDate`, `Price`) VALUES
+(1, 1, 1, '2024-01-10', '2024-01-12', 300.00),  -- Booking by Alice
+(2, 2, 2, '2024-01-15', '2024-01-18', 450.00),  -- Booking by Bob
+(3, 3, 3, '2024-01-20', '2024-01-22', 500.00),  -- Booking by Carol
+(4, 1, 4, '2024-02-05', '2024-02-07', 350.00),  -- Booking by David
+(5, 1, 1, '2024-02-10', '2024-02-12', 500.00),  -- Booking by Emma
+(6, 2, 2, '2024-02-15', '2024-02-17', 650.00),  -- Booking by Frank
+(7, 3, 3, '2024-02-20', '2024-02-22', 400.00);  -- Booking by Grace
+
+-- Insert bookings room type
+INSERT INTO `BookingRoom` (`BookingID`, `RoomID`) VALUES
+-- Assigning rooms for Sunset Resort (Hotel ID 1)
+(1, 1), -- Booking by Alice, Standard Single, RoomID 1 (SR101)
+(1, 5), -- Booking by Alice, Standard Double, RoomID 5 (SR105)
+(2, 6), -- Booking by Bob, Standard Double, RoomID 6 (SR106)
+(2, 8), -- Booking by Bob, Deluxe Double, RoomID 8 (SR201)
+(3, 9), -- Booking by Carol, Deluxe Double, RoomID 9 (SR202)
+(4, 10), -- Booking by David, Suite, RoomID 10 (SR301)
+(5, 7), (5, 11), -- Booking by Emma, Deluxe Single, RoomIDs 7 (SR203), 11 (SR205)
+(6, 12), -- Booking by Frank, Deluxe Single, RoomID 12 (SR206)
+(6, 13), -- Booking by Frank, Executive Suite, RoomID 13 (SR501)
+(7, 14), (7, 15); -- Booking by Grace, Family Room, RoomIDs 14 (SR701), 15 (SR702)
+
+
+-- Insert service bookings
+INSERT INTO `BookingService` (`BookingID`, `ServiceID`, `ServiceStatusID`, `Unit`, `Note`) VALUES
+(1, 1, 1, 1, 'Car rental for entire stay'),        -- Car Rental for Alice
+(1, 7, 1, 2, 'Two guided tours'),                  -- Excursions and Guided Tours for Alice
+(2, 4, 1, 3, 'Daily ironing service'),             -- Ironing for Bob
+(3, 5, 1, 1, 'Catering for a private event'),      -- Catering for Carol
+(4, 12, 1, 1, 'Airport shuttle on departure'),     -- Airport Shuttle for David
+(5, 3, 1, 5, 'Dry cleaning during stay'),          -- Dry Cleaning for Emma
+(6, 9, 1, 1, 'Room upgrade to Executive Suite'),   -- Room Upgrade for Frank
+(7, 10, 1, 1, 'Early check-in requested'),         -- Early Check-In for Grace
+(7, 15, 1, 2, 'Personal trainer sessions');        -- Personal Trainer Services for Grace
+
+
+-- Insert Feedback for each booking
+INSERT INTO `Feedback` (`BookingID`, `Rating`, `Comment`) VALUES
+(1, 5, 'Excellent service and comfortable stay. Loved the car rental service.'),
+(2, 4, 'Very good experience, but the ironing service took longer than expected.'),
+(3, 3, 'Average stay. Room was clean, but catering service was not up to the mark.'),
+(4, 5, 'Fantastic experience! Concierge was exceptionally helpful.'),
+(5, 4, 'Great stay overall, loved the flower arrangement in the room.'),
+(6, 2, 'Room was nice, but car rental service was not available when needed.'),
+(7, 5, 'Perfect stay with excellent guided tour arrangements. Highly recommended.');
+
+-- Insert PaymentMethod
+INSERT INTO `PaymentMethod` (`MethodName`, `Description`) VALUES
+('Credit Card', 'Payment made using a credit card'),
+('Debit Card', 'Payment made using a debit card'),
+('Cash', 'Payment made in cash'),
+('Online Transfer', 'Payment made via online bank transfer');
+
+-- Insert Payment
+INSERT INTO `Payment` (`BookingID`, `PaymentMethodID`, `Amount`) VALUES
+(1, 1, 300.00), -- Payment for Alice's booking
+(2, 2, 450.00), -- Payment for Bob's booking
+(3, 3, 500.00), -- Payment for Carol's booking
+(4, 1, 350.00), -- Payment for David's booking
+(5, 4, 500.00), -- Payment for Emma's booking
+(6, 2, 650.00), -- Payment for Frank's booking
+(7, 3, 400.00); -- Payment for Grace's booking
