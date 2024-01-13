@@ -50,11 +50,11 @@ END //
 
 DELIMITER ;
 
-DELIMITER //
-
 
 -- 3 --
 -- SQL procedure to fetch reviews, ratings, and review times for a given date range.
+
+DELIMITER //
 
 CREATE PROCEDURE GetCustomerFeedback(IN start_date DATE, IN end_date DATE)
 BEGIN

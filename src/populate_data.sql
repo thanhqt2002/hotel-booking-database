@@ -261,7 +261,21 @@ INSERT INTO `Booking` (`GuestID`, `HotelID`, `BookingStatusID`, `CheckinDate`, `
 (6, 2, 2, '2024-02-15', '2024-02-17', 650.00),  -- Booking by Frank
 (7, 3, 3, '2024-02-20', '2024-02-22', 400.00);  -- Booking by Grace
 
+
 -- Insert bookings room type
+INSERT INTO BookingRoomType (BookingID, RoomTypeID, Unit) VALUES
+(1, 1, 1), -- Booking by Alice, Standard Single, 1 unit
+(1, 2, 1), -- Booking by Alice, Standard Double, 1 unit
+(2, 2, 1), -- Booking by Bob, Standard Double, 1 unit
+(2, 4, 1), -- Booking by Bob, Deluxe Double, 1 unit
+(3, 4, 1), -- Booking by Carol, Deluxe Double, 1 unit
+(4, 5, 1), -- Booking by David, Suite, 1 unit
+(5, 3, 2), -- Booking by Emma, Deluxe Single, 2 units
+(6, 3, 1), -- Booking by Frank, Deluxe Single, 1 unit
+(6, 6, 1), -- Booking by Frank, Executive Suite, 1 unit
+(7, 8, 1); -- Booking by Grace, Family Room, 1 unit
+
+-- Insert bookings room
 INSERT INTO `BookingRoom` (`BookingID`, `RoomID`) VALUES
 -- Assigning rooms for Sunset Resort (Hotel ID 1)
 (1, 1), -- Booking by Alice, Standard Single, RoomID 1 (SR101)
